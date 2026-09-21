@@ -171,23 +171,22 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                         <span class="sidebar__icon">&lt;/&gt;</span>
                         <div>
                             <h2>Bài tập PHP</h2>
-                            <small>
-                                <?php if ($tuKhoaTimKiem !== ''): ?>
-                                    <?= count($danhSachHienThi) ?> kết quả cho
-                                    “<?= escape($tuKhoaTimKiem) ?>”
-                                <?php else: ?>
-                                    Danh sách bài thực hành
-                                <?php endif; ?>
-                            </small>
+                            <small>Danh sách bài thực hành</small>
                         </div>
                     </div>
                 </div>
 
                 <nav class="exercise-nav" aria-label="Danh sách bài tập">
-                    <?php foreach ($danhSachHienThi as $id => $bai): ?>
+                    <?php if ($tuKhoaTimKiem !== '' && empty($danhSachHienThi)): ?>
+                        <div class="alert alert--error">
+                            Không tìm thấy bài học phù hợp.
+                        </div>
+                    <?php endif; ?>
+
+                    <?php foreach ($danhSachBai as $id => $bai): ?>
                         <a
                             class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>"
-                            href="?bai=<?= $id ?><?= $tuKhoaTimKiem !== '' ? '&q=' . urlencode($tuKhoaTimKiem) : '' ?>"
+                            href="?bai=<?= $id ?>"
                         >
                             <span class="exercise-link__dot">▶</span>
                             <span class="exercise-link__text">
@@ -196,12 +195,6 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                             </span>
                         </a>
                     <?php endforeach; ?>
-
-                    <?php if ($tuKhoaTimKiem !== '' && empty($danhSachHienThi)): ?>
-                        <div class="alert alert--error">
-                            Không tìm thấy bài học phù hợp.
-                        </div>
-                    <?php endif; ?>
                 </nav>
             </aside>
 
