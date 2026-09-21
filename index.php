@@ -20,18 +20,57 @@ $menuLinks = [
 ];
 
 $danhSachBai = [
-    1 => ['tieuDe' => 'Nhập số đến khi gặp 0', 'file' => 'exercises/bai1.php'],
-    2 => ['tieuDe' => 'Kiểm tra số hoàn hảo', 'file' => 'exercises/bai2.php'],
-    3 => ['tieuDe' => 'Tính n giai thừa', 'file' => 'exercises/bai3.php'],
-    4 => ['tieuDe' => 'Liệt kê các ước số', 'file' => 'exercises/bai4.php'],
-    5 => ['tieuDe' => 'Đếm số âm và số dương', 'file' => 'exercises/bai5.php'],
-    6 => ['tieuDe' => 'Đổi giây sang giờ:phút:giây', 'file' => 'exercises/bai6.php'],
-    7 => ['tieuDe' => 'PERSON và SINHVIEN', 'file' => 'exercises/bai7.php'],
+    1 => [
+        'tieuDe' => 'Nhập số đến khi gặp 0',
+        'file' => 'exercises/bai1.php',
+        'tuKhoa' => 'nhap so session vong lap input 0',
+    ],
+    2 => [
+        'tieuDe' => 'Kiểm tra số hoàn hảo',
+        'file' => 'exercises/bai2.php',
+        'tuKhoa' => 'so hoan hao perfect number uoc so',
+    ],
+    3 => [
+        'tieuDe' => 'Tính n giai thừa',
+        'file' => 'exercises/bai3.php',
+        'tuKhoa' => 'giai thua factorial de quy recursion',
+    ],
+    4 => [
+        'tieuDe' => 'Liệt kê các ước số',
+        'file' => 'exercises/bai4.php',
+        'tuKhoa' => 'uoc so chia het divisor',
+    ],
+    5 => [
+        'tieuDe' => 'Đếm số âm và số dương',
+        'file' => 'exercises/bai5.php',
+        'tuKhoa' => 'mang array so am so duong so 0',
+    ],
+    6 => [
+        'tieuDe' => 'Đổi giây sang giờ:phút:giây',
+        'file' => 'exercises/bai6.php',
+        'tuKhoa' => 'giay gio phut time hh mm ss',
+    ],
+    7 => [
+        'tieuDe' => 'PERSON và SINHVIEN',
+        'file' => 'exercises/bai7.php',
+        'tuKhoa' => 'person sinhvien sinh vien oop huong doi tuong ke thua inheritance class object',
+    ],
 ];
+
+$tuKhoaTimKiem = trim($_GET['q'] ?? '');
+$danhSachHienThi = timKiemBaiHoc($danhSachBai, $tuKhoaTimKiem);
 
 $baiHienTai = isset($_GET['bai']) ? (int) $_GET['bai'] : 1;
 if (!isset($danhSachBai[$baiHienTai])) {
     $baiHienTai = 1;
+}
+
+if (
+    $tuKhoaTimKiem !== '' &&
+    !empty($danhSachHienThi) &&
+    !isset($danhSachHienThi[$baiHienTai])
+) {
+    $baiHienTai = array_keys($danhSachHienThi)[0];
 }
 
 $tongSoBai = count($danhSachBai);
@@ -75,11 +114,16 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                 </a>
             </nav>
 
-            <div class="search-box">
-                <span style="font-size: 0.9rem; color: var(--text-muted); padding-left: 10px;">
-                    Bài <?= $baiHienTai ?> / <?= $tongSoBai ?>
-                </span>
-            </div>
+            <form class="search-box" method="get" action="">
+                <input
+                    type="search"
+                    name="q"
+                    value="<?= escape($tuKhoaTimKiem) ?>"
+                    placeholder="Tìm bài học..."
+                    aria-label="Tìm kiếm bài học"
+                >
+                <button class="search-box__button" type="submit" aria-label="Tìm kiếm">⌕</button>
+            </form>
         </header>
 
         <section class="hero-banner">
@@ -127,13 +171,20 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                         <span class="sidebar__icon">&lt;/&gt;</span>
                         <div>
                             <h2>Bài tập PHP</h2>
-                            <small>Danh sách bài thực hành</small>
+                            <small>
+                                <?php if ($tuKhoaTimKiem !== ''): ?>
+                                    <?= count($danhSachHienThi) ?> kết quả cho
+                                    “<?= escape($tuKhoaTimKiem) ?>”
+                                <?php else: ?>
+                                    Danh sách bài thực hành
+                                <?php endif; ?>
+                            </small>
                         </div>
                     </div>
                 </div>
 
                 <nav class="exercise-nav" aria-label="Danh sách bài tập">
-                    <?php foreach ($danhSachBai as $id => $bai): ?>
+                    <?php foreach ($danhSachHienThi as $id => $bai): ?>
                         <a class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>" href="?bai=<?= $id ?>">
                             <span class="exercise-link__dot">▶</span>
                             <span class="exercise-link__text">
@@ -142,6 +193,12 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                             </span>
                         </a>
                     <?php endforeach; ?>
+
+                    <?php if ($tuKhoaTimKiem !== '' && empty($danhSachHienThi)): ?>
+                        <div class="alert alert--error">
+                            Không tìm thấy bài học phù hợp.
+                        </div>
+                    <?php endif; ?>
                 </nav>
             </aside>
 

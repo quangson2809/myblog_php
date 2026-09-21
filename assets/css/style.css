@@ -228,7 +228,9 @@ textarea:focus-visible {
     width: 34px;
     height: 34px;
     place-items: center;
+    border: 0;
     border-radius: 50%;
+    cursor: pointer;
     color: #09110c;
     background: linear-gradient(135deg, var(--green-bright), var(--gold));
     box-shadow: 0 8px 18px rgba(57, 216, 111, 0.22);

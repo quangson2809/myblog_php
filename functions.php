@@ -5,6 +5,61 @@ function escape($value)
     return htmlspecialchars((string) ($value ?? ''), ENT_QUOTES, 'UTF-8');
 }
 
+function chuanHoaVanBanTimKiem($value)
+{
+    $value = trim((string) $value);
+
+    if ($value === '') {
+        return '';
+    }
+
+    if (function_exists('mb_strtolower')) {
+        $value = mb_strtolower($value, 'UTF-8');
+    } else {
+        $value = strtolower($value);
+    }
+
+    $value = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $value) ?? $value;
+    $value = preg_replace('/\s+/u', ' ', $value) ?? $value;
+
+    return trim($value);
+}
+
+function timKiemBaiHoc($danhSachBai, $tuKhoa)
+{
+    $tuKhoa = chuanHoaVanBanTimKiem($tuKhoa);
+
+    if ($tuKhoa === '') {
+        return $danhSachBai;
+    }
+
+    $cacTuKhoa = explode(' ', $tuKhoa);
+    $ketQua = [];
+
+    foreach ($danhSachBai as $id => $bai) {
+        $noiDungTimKiem = chuanHoaVanBanTimKiem(
+            'bai ' . $id . ' ' .
+            ($bai['tieuDe'] ?? '') . ' ' .
+            ($bai['tuKhoa'] ?? '')
+        );
+
+        $khop = true;
+
+        foreach ($cacTuKhoa as $tu) {
+            if (strpos(' ' . $noiDungTimKiem . ' ', ' ' . $tu . ' ') === false) {
+                $khop = false;
+                break;
+            }
+        }
+
+        if ($khop) {
+            $ketQua[$id] = $bai;
+        }
+    }
+
+    return $ketQua;
+}
+
 function kiemTraSoHoanHao($n)
 {
     if ($n <= 1) {

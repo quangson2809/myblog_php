@@ -44,4 +44,37 @@ expect($sv->getHoTen() === 'Nguyễn Văn A', 'SINHVIEN kế thừa họ tên t�
 expect($sv->getQueQuan() === 'Hà Nội', 'SINHVIEN kế thừa quê quán từ PERSON');
 expect($sv->getLop() === 'CNTT01', 'SINHVIEN có thêm thuộc tính lớp');
 
+// 7. Tìm kiếm bài học
+$danhSachBaiTest = [
+    1 => [
+        'tieuDe' => 'Nhập số đến khi gặp 0',
+        'tuKhoa' => 'nhap so session vong lap',
+    ],
+    3 => [
+        'tieuDe' => 'Tính n giai thừa',
+        'tuKhoa' => 'giai thua factorial de quy',
+    ],
+    7 => [
+        'tieuDe' => 'PERSON và SINHVIEN',
+        'tuKhoa' => 'person sinh vien oop ke thua',
+    ],
+];
+
+expect(
+    array_keys(timKiemBaiHoc($danhSachBaiTest, 'giai thua')) === [3],
+    'Tìm "giai thua" trả về bài 3'
+);
+expect(
+    array_keys(timKiemBaiHoc($danhSachBaiTest, 'OOP')) === [7],
+    'Tìm "OOP" không phân biệt chữ hoa/thường'
+);
+expect(
+    array_keys(timKiemBaiHoc($danhSachBaiTest, 'so')) === [1],
+    'Tìm theo từ không khớp nhầm "so" trong PERSON'
+);
+expect(
+    timKiemBaiHoc($danhSachBaiTest, '') === $danhSachBaiTest,
+    'Từ khóa rỗng trả về toàn bộ bài học'
+);
+
 echo PHP_EOL . 'Tất cả smoke test cho functions.php đã chạy THÀNH CÔNG.' . PHP_EOL;
