@@ -115,13 +115,8 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
             </nav>
 
             <form class="search-box" method="get" action="">
-                <input
-                    type="search"
-                    name="q"
-                    value="<?= escape($tuKhoaTimKiem) ?>"
-                    placeholder="Tìm bài học..."
-                    aria-label="Tìm kiếm bài học"
-                >
+                <input type="search" name="q" value="<?= escape($tuKhoaTimKiem) ?>" placeholder="Tìm bài học..."
+                    aria-label="Tìm kiếm bài học">
                 <button class="search-box__button" type="submit" aria-label="Tìm kiếm">⌕</button>
             </form>
         </header>
@@ -184,10 +179,7 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
                     <?php endif; ?>
 
                     <?php foreach ($danhSachBai as $id => $bai): ?>
-                        <a
-                            class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>"
-                            href="?bai=<?= $id ?>"
-                        >
+                        <a class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>" href="?bai=<?= $id ?>">
                             <span class="exercise-link__dot">▶</span>
                             <span class="exercise-link__text">
                                 <strong>Bài tập <?= $id ?></strong>
