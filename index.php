@@ -185,7 +185,10 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
 
                 <nav class="exercise-nav" aria-label="Danh sách bài tập">
                     <?php foreach ($danhSachHienThi as $id => $bai): ?>
-                        <a class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>" href="?bai=<?= $id ?>">
+                        <a
+                            class="exercise-link <?= $id === $baiHienTai ? 'active' : '' ?>"
+                            href="?bai=<?= $id ?><?= $tuKhoaTimKiem !== '' ? '&q=' . urlencode($tuKhoaTimKiem) : '' ?>"
+                        >
                             <span class="exercise-link__dot">▶</span>
                             <span class="exercise-link__text">
                                 <strong>Bài tập <?= $id ?></strong>
