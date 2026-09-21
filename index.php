@@ -151,10 +151,14 @@ $baiSau = $baiHienTai < $tongSoBai ? $baiHienTai + 1 : null;
 
             <div class="hero-banner__visual" aria-hidden="true">
                 <div class="hero-illustration">
-                    <div class="hero-blob hero-blob--one"></div>
-                    <div class="hero-blob hero-blob--two"></div>
-                    <div class="hero-blob hero-blob--three"></div>
-                    <div class="hero-core"></div>
+                    <img
+                        class="hero-banner__image"
+                        src="assets/banner.png"
+                        alt=""
+                        width="1024"
+                        height="576"
+                        fetchpriority="high"
+                    >
                 </div>
             </div>
         </section>

@@ -364,66 +364,20 @@ textarea:focus-visible {
 .hero-illustration {
     position: relative;
     width: min(100%, 520px);
-    height: 282px;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     border: 1px solid rgba(255, 228, 130, 0.15);
     border-radius: 28px;
-    background:
-        radial-gradient(circle at 60% 22%, rgba(91, 241, 141, 0.24), transparent 18%),
-        radial-gradient(circle at 54% 44%, rgba(41, 124, 70, 0.28), transparent 24%),
-        linear-gradient(145deg, #07110a 0%, #0a2817 52%, #171206 100%);
+    background: #07110a;
     box-shadow: 0 24px 42px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-.hero-illustration::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.05), transparent 15%),
-        radial-gradient(circle at 50% 50%, rgba(87, 250, 149, 0.08), transparent 12%);
-}
-
-.hero-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(16px);
-}
-
-.hero-blob--one {
-    top: 24px;
-    left: 110px;
-    width: 220px;
-    height: 120px;
-    background: rgba(57, 216, 111, 0.14);
-}
-
-.hero-blob--two {
-    right: 70px;
-    top: 56px;
-    width: 180px;
-    height: 120px;
-    background: rgba(239, 201, 79, 0.13);
-}
-
-.hero-blob--three {
-    left: 174px;
-    bottom: 26px;
-    width: 110px;
-    height: 180px;
-    background: rgba(76, 255, 135, 0.17);
-}
-
-.hero-core {
-    position: absolute;
-    left: 50%;
-    bottom: 16px;
-    width: 16px;
-    height: 124px;
-    transform: translateX(-50%);
-    border-radius: 999px;
-    background: linear-gradient(180deg, rgba(239, 201, 79, 0.14), rgba(82, 239, 131, 0.96));
-    box-shadow: 0 0 30px rgba(82, 239, 131, 0.48);
+.hero-banner__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
 /* ---------- Workspace ---------- */
@@ -1294,7 +1248,7 @@ textarea:focus-visible {
     }
 
     .hero-illustration {
-        height: 220px;
+        width: 100%;
     }
 
     .exercise-heading {
