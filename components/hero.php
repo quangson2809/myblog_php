@@ -26,16 +26,4 @@
                 </div>
             </div>
 
-            <div class="hero-banner__visual" aria-hidden="true">
-                <div class="hero-illustration">
-                    <img
-                        class="hero-banner__image"
-                        src="assets/banner.png"
-                        alt=""
-                        width="1024"
-                        height="576"
-                        fetchpriority="high"
-                    >
-                </div>
-            </div>
         </section>
